@@ -45,25 +45,28 @@ function Books() {
       })
     })
   }
+  const updateState = (value) => {
+    setBooks({ query: value}, getInfo);
+  };
   // Handles updating component state when the user types into the input field
   function handleInputChange(event) {
     const { name, value } = event.target;
     setFormObject({...formObject, [name]: value})
 
-    
+    console.log("event.target.name: ", event.target.value)
       // API.getBook(value)
       // .then(this.state = name)
     
-      setBooks({
-        query: this.name
-      }, () => {
-        if (setBooks.query && setBooks.query.length > 1) {
-          if (setBooks.query.length % 2 === 0) {
-            this.getInfo()
-          }
-        } 
-      })
-
+      // setBooks({
+      //   query: value
+      // }, () => {
+      //   if (setBooks.query && setBooks.query.length > 1) {
+      //     if (setBooks.query.length % 2 === 0) {
+      //       this.getInfo()
+      //     }
+      //   } 
+      // })
+    updateState()
     console.log(setBooks)
   };
 
