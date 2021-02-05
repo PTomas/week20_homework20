@@ -24,11 +24,10 @@ function Books() {
   function loadBooks() {
     API.getBooks()
       .then(res => 
-        setBooks(res.data)
+        setBooks(res.data),
       )
       .catch(err => console.log(err));
   };
-
   // Deletes a book from the database with a given id, then reloads books from the db
   function deleteBook(id) {
     API.deleteBook(id)
