@@ -41,7 +41,7 @@ function Books() {
 
     
       API.getBook(name)
-      .then
+      .then(this.state = name)
     
   };
 
