@@ -36,10 +36,10 @@ function Books() {
       .catch(err => console.log(err));
   }
 
-  getInfo = () => {
-    API.getBooks()
+  const getInfo = (setBooks) => {
+    API.getBooks(setBooks)
     .then(({ data }) => {
-      this.state({
+      setBooks({
         results: data.data // MusicGraph returns an object named data, 
                            // as does axios. So... data.data                             
       })
@@ -54,17 +54,17 @@ function Books() {
       // API.getBook(value)
       // .then(this.state = name)
     
-      this.state({
-        query: this.search.value
+      setBooks({
+        query: this.name
       }, () => {
-        if (this.state.query && this.state.query.length > 1) {
-          if (this.state.query.length % 2 === 0) {
+        if (setBooks.query && setBooks.query.length > 1) {
+          if (setBooks.query.length % 2 === 0) {
             this.getInfo()
           }
         } 
       })
 
-    console.log(this.state)
+    console.log(setBooks)
   };
 
   // When the form is submitted, use the API.saveBook method to save the book data
