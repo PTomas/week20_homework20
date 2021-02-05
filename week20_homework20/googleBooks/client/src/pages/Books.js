@@ -38,6 +38,11 @@ function Books() {
   function handleInputChange(event) {
     const { name, value } = event.target;
     setFormObject({...formObject, [name]: value})
+
+    
+      API.getBook(name)
+      .then
+    
   };
 
   // When the form is submitted, use the API.saveBook method to save the book data
@@ -69,7 +74,7 @@ function Books() {
                 placeholder="Title (required)"
               />
 
-              {this.state.result.title ? (
+              {/* {this.state.result.title ? (
                 <TitleBook
                 title={this.state.result.title}
                 src={this.state.result.image}
@@ -80,7 +85,7 @@ function Books() {
 
               ) : (
                 <h3>No Results to Display</h3>
-              )}
+              )} */}
               <FormBtn
                 disabled={!(formObject.author && formObject.title)}
                 onClick={handleFormSubmit}
