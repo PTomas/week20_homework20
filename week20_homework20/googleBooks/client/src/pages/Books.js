@@ -3,15 +3,17 @@ import DeleteBtn from "../components/DeleteBtn";
 import Jumbotron from "../components/Jumbotron";
 import TitleBook from "../components/TitleBook";
 import API from "../utils/API";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { Col, Row, Container } from "../components/Grid";
 import { List, ListItem } from "../components/List";
 import { Input, TextArea, FormBtn } from "../components/Form";
+
 
 function Books() {
   // Setting our component's initial state
   const [books, setBooks] = useState([])
   const [formObject, setFormObject] = useState({})
+  const {id} = useParams()
 
   // Load all books and store them with setBooks
   useEffect(() => {
@@ -34,15 +36,35 @@ function Books() {
       .catch(err => console.log(err));
   }
 
+  getInfo = () => {
+    API.getBooks()
+    .then(({ data }) => {
+      this.state({
+        results: data.data // MusicGraph returns an object named data, 
+                           // as does axios. So... data.data                             
+      })
+    })
+  }
   // Handles updating component state when the user types into the input field
   function handleInputChange(event) {
     const { name, value } = event.target;
     setFormObject({...formObject, [name]: value})
 
     
-      API.getBook(name)
-      .then(this.state = name)
+      // API.getBook(value)
+      // .then(this.state = name)
     
+      this.state({
+        query: this.search.value
+      }, () => {
+        if (this.state.query && this.state.query.length > 1) {
+          if (this.state.query.length % 2 === 0) {
+            this.getInfo()
+          }
+        } 
+      })
+
+    console.log(this.state)
   };
 
   // When the form is submitted, use the API.saveBook method to save the book data
