@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios";
 import DeleteBtn from "../components/DeleteBtn";
 import Jumbotron from "../components/Jumbotron";
 import TitleBook from "../components/TitleBook";
@@ -46,6 +47,7 @@ function Books() {
   }
   const updateState = (value) => {
     setBooks({ query: value}, getInfo);
+    return axios.get("/api/books");
   };
   // Handles updating component state when the user types into the input field
   function handleInputChange(event) {
